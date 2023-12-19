@@ -40,11 +40,17 @@
     return this.delegateSave_(pskl.app.fileDownloadStorageService, piskel);
   };
 
+  ns.StorageService.prototype.saveToFileOnline = function (piskel) {
+    alert('Guardando de Goggle Drive');
+    console.log({ piskel });
+    // return this.delegateSave_(pskl.app.fileDownloadStorageService, piskel);
+  };
+
   ns.StorageService.prototype.saveToDesktop = function (piskel, saveAsNew) {
     return this.delegateSave_(pskl.app.desktopStorageService, piskel, saveAsNew);
   };
 
-  ns.StorageService.prototype.delegateSave_ = function(delegatedService, piskel, saveAsNew) {
+  ns.StorageService.prototype.delegateSave_ = function (delegatedService, piskel, saveAsNew) {
     if (this.savingFlag_) {
       return Q.reject('Already saving');
     }
@@ -86,8 +92,8 @@
 
   ns.StorageService.prototype.onSaveSuccess_ = function () {
     $.publish(Events.SHOW_NOTIFICATION, [{
-      content : 'Successfully saved !',
-      hideDelay : 3000
+      content: 'Successfully saved !',
+      hideDelay: 3000
     }]);
     $.publish(Events.PISKEL_SAVED);
     this.afterSaving_();
@@ -99,8 +105,8 @@
       errorText += ' : ' + errorMessage;
     }
     $.publish(Events.SHOW_NOTIFICATION, [{
-      content : errorText,
-      hideDelay : 10000
+      content: errorText,
+      hideDelay: 10000
     }]);
     this.afterSaving_();
     return Q.reject(errorMessage);

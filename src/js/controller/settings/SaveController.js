@@ -2,11 +2,11 @@
   var ns = $.namespace('pskl.controller.settings');
 
   var PARTIALS = {
-    DESKTOP : 'save-desktop-partial',
-    GALLERY : 'save-gallery-partial',
-    GALLERY_UNAVAILABLE : 'save-gallery-unavailable-partial',
-    LOCALSTORAGE : 'save-localstorage-partial',
-    FILEDOWNLOAD : 'save-file-download-partial'
+    DESKTOP: 'save-desktop-partial',
+    GALLERY: 'save-gallery-partial',
+    GALLERY_UNAVAILABLE: 'save-gallery-unavailable-partial',
+    LOCALSTORAGE: 'save-localstorage-partial',
+    FILEDOWNLOAD: 'save-file-download-partial'
   };
 
   ns.SaveController = function (piskelController) {
@@ -24,7 +24,7 @@
 
     this.piskelName = document.querySelector('.piskel-name');
     this.descriptionInput = document.querySelector('#save-description');
-    this.nameInput =  document.querySelector('#save-name');
+    this.nameInput = document.querySelector('#save-name');
     this.isPublicCheckbox = document.querySelector('input[name=save-public-checkbox]');
     this.updateDescriptorInputs_();
 
@@ -33,12 +33,14 @@
     this.saveDesktopButton = document.querySelector('#save-desktop-button');
     this.saveDesktopAsNewButton = document.querySelector('#save-desktop-as-new-button');
     this.saveFileDownloadButton = document.querySelector('#save-file-download-button');
+    this.saveFileOnlineButton = document.querySelector('#save-online-button');
 
     this.safeAddEventListener_(this.saveLocalStorageButton, 'click', this.saveToIndexedDb_);
     this.safeAddEventListener_(this.saveGalleryButton, 'click', this.saveToGallery_);
     this.safeAddEventListener_(this.saveDesktopButton, 'click', this.saveToDesktop_);
     this.safeAddEventListener_(this.saveDesktopAsNewButton, 'click', this.saveToDesktopAsNew_);
     this.safeAddEventListener_(this.saveFileDownloadButton, 'click', this.saveToFileDownload_);
+    this.safeAddEventListener_(this.saveFileOnlineButton, 'click', this.saveFileOnlineButton_);
 
     this.addEventListener(this.saveForm, 'submit', this.onSaveFormSubmit_);
 
@@ -105,6 +107,10 @@
 
   ns.SaveController.prototype.saveToFileDownload_ = function () {
     this.saveTo_('saveToFileDownload', false);
+  };
+
+  ns.SaveController.prototype.saveFileOnlineButton_ = function () {
+    this.saveTo_('saveToFileOnline', false);
   };
 
   ns.SaveController.prototype.saveToGallery_ = function () {
